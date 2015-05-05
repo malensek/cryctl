@@ -8,7 +8,7 @@ MANDIR ?= $(PREFIX)/share/man
 
 CFLAGS += -Wall
 
-src=635.c cf_packet.c serial.c show_packet.c
+src=./src/635.c ./src/cf_packet.c ./src/serial.c src/show_packet.c
 obj=$(src:.c=.o)
 
 all: $(bin)
@@ -16,6 +16,10 @@ all: $(bin)
 $(bin): $(obj)
 	$(CC) $(CFLAGS) $(obj) -o $@
 
-cf_packet.o: cf_packet.h typedefs.h
-serial.o: serial.h typedefs.h
-show_packet.o: show_packet.h typedefs.h
+options:
+	@echo Build Options:
+	@echo CFLAGS = ${CFLAGS}
+
+cf_packet.o: src/cf_packet.h src/typedefs.h
+serial.o: src/serial.h src/typedefs.h
+show_packet.o: ./src/show_packet.h src/typedefs.h
