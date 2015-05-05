@@ -34,7 +34,21 @@ bool clear_lcd() {
     outgoing_response.command = 6;
     outgoing_response.data_length = 0;
     send_packet();
+    wait_reply();
+
+    outgoing_response.command = 34;
+    outgoing_response.data_length = 2;
+    outgoing_response.data[0] = 8;
+    outgoing_response.data[1] = 50;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.command = 14;
+    outgoing_response.data_length = 1;
+    outgoing_response.data[0] = 15;
+    send_packet();
     return wait_reply();
+
 }
 
 bool update_lcd(int line, char *str) {
