@@ -38,17 +38,120 @@ bool clear_lcd() {
 
     outgoing_response.command = 34;
     outgoing_response.data_length = 2;
-    outgoing_response.data[0] = 8;
-    outgoing_response.data[1] = 50;
+    outgoing_response.data[0] = 11;
+    outgoing_response.data[1] = 0;
     send_packet();
     wait_reply();
 
-    outgoing_response.command = 14;
-    outgoing_response.data_length = 1;
-    outgoing_response.data[0] = 15;
-    send_packet();
-    return wait_reply();
+    outgoing_response.command = 9;
+    outgoing_response.data_length = 9;
 
+    outgoing_response.data[0] = 0;
+
+    outgoing_response.data[1] = 0;
+    outgoing_response.data[2] = 0;
+    outgoing_response.data[3] = 0;
+    outgoing_response.data[4] = 32;
+    outgoing_response.data[5] = 48;
+    outgoing_response.data[6] = 56;
+    outgoing_response.data[7] = 60;
+    outgoing_response.data[8] = 62;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 1;
+
+    outgoing_response.data[1] = 0;
+    outgoing_response.data[2] = 0;
+    outgoing_response.data[3] = 0;
+    outgoing_response.data[4] = 1;
+    outgoing_response.data[5] = 3;
+    outgoing_response.data[6] = 7;
+    outgoing_response.data[7] = 15;
+    outgoing_response.data[8] = 31;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 2;
+
+    outgoing_response.data[1] = 0;
+    outgoing_response.data[2] = 32;
+    outgoing_response.data[3] = 48;
+    outgoing_response.data[4] = 56;
+    outgoing_response.data[5] = 60;
+    outgoing_response.data[6] = 62;
+    outgoing_response.data[7] = 63;
+    outgoing_response.data[8] = 63;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 3;
+
+    outgoing_response.data[1] = 0;
+    outgoing_response.data[2] = 0;
+    outgoing_response.data[3] = 0;
+    outgoing_response.data[4] = 0;
+    outgoing_response.data[5] = 0;
+    outgoing_response.data[6] = 0;
+    outgoing_response.data[7] = 0;
+    outgoing_response.data[8] = 33;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 4;
+
+    outgoing_response.data[1] = 0;
+    outgoing_response.data[2] = 1;
+    outgoing_response.data[3] = 3;
+    outgoing_response.data[4] = 7;
+    outgoing_response.data[5] = 15;
+    outgoing_response.data[6] = 31;
+    outgoing_response.data[7] = 63;
+    outgoing_response.data[8] = 63;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 5;
+
+    outgoing_response.data[1] = 63;
+    outgoing_response.data[2] = 63;
+    outgoing_response.data[3] = 31;
+    outgoing_response.data[4] = 15;
+    outgoing_response.data[5] = 7;
+    outgoing_response.data[6] = 3;
+    outgoing_response.data[7] = 1;
+    outgoing_response.data[8] = 0;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 6;
+
+    outgoing_response.data[1] = 63;
+    outgoing_response.data[2] = 63;
+    outgoing_response.data[3] = 63;
+    outgoing_response.data[4] = 63;
+    outgoing_response.data[5] = 63;
+    outgoing_response.data[6] = 63;
+    outgoing_response.data[7] = 63;
+    outgoing_response.data[8] = 63;
+    send_packet();
+    wait_reply();
+
+    outgoing_response.data[0] = 7;
+
+    outgoing_response.data[1] = 63;
+    outgoing_response.data[2] = 63;
+    outgoing_response.data[3] = 62;
+    outgoing_response.data[4] = 60;
+    outgoing_response.data[5] = 56;
+    outgoing_response.data[6] = 48;
+    outgoing_response.data[7] = 32;
+    outgoing_response.data[8] = 0;
+    send_packet();
+    wait_reply();
+
+
+    return true;
 }
 
 bool update_lcd(int line, char *str) {
