@@ -226,5 +226,11 @@ int main(int argc, char* argv[]) {
         update_lcd(i, line);
     }
 
+    outgoing_response.command = 4;
+    outgoing_response.data_length = 0;
+    send_packet();
+    wait_reply();
+
+
     return EXIT_SUCCESS;
 }
