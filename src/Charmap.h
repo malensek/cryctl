@@ -9,7 +9,7 @@ class Charmap {
         void asciiToLcd();
 
     private:
-        std::unordered_map<uint8_t, uint8_t> map;
+        static const std::unordered_map<uint8_t, uint8_t> toLcdMap;
 };
 
 #endif
