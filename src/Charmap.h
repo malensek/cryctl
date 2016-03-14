@@ -5,8 +5,8 @@
 
 class Charmap {
     public:
-        void cfToAscii();
-        void asciiToCf();
+        void lcdToAscii();
+        void asciiToLcd();
 
     private:
         std::unordered_map<uint8_t, uint8_t> map;
