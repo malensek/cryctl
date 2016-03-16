@@ -43,6 +43,12 @@ class Display {
             if(tcsetattr(_fd, TCSANOW, &term) == -1) {
                 std::perror("Display():tcsetattr");
             }
+
+        }
+
+        ~Display() {
+            close(_fd);
+            _fd = -1;
         }
 
     private:
@@ -54,7 +60,7 @@ class Display {
 
 int main (int argc, char *argv[]) {
 
-    Display d("/s/blah/whatever");
+    Display d("/dev/tty");
 }
 
 
