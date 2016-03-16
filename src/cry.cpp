@@ -4,6 +4,27 @@
 #include <vector>
 #include <string>
 #include <termios.h>
+#ifndef OFILL
+#define OFILL   0000100
+#endif
+#ifndef OFDEL
+#define OFDEL   0000200
+#endif
+#ifndef NLDLY
+#define NLDLY   0000400
+#endif
+#ifndef CRDLY
+#define CRDLY   0003000
+#endif
+#ifndef BSDLY
+#define BSDLY   0020000
+#endif
+#ifndef VTDLY
+#define VTDLY   0040000
+#endif
+#ifndef FFDLY
+#define FFDLY   0100000
+#endif
 
 class Display {
     public:
