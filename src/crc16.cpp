@@ -35,13 +35,14 @@ const uint16_t CRC16::lut[] = {
     0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,
 };
 
-uint16_t CRC16::compute(uint8_t *data) {
-    unsigned short crc = 0xFFFF;
-    for (unsigned long i = 0; i < sizeof(data); ++i) {
-        int lookup = lut[(crc ^ data[i]) & 0xFF];
+uint16_t CRC16::compute(uint8_t *data, size_t len) {
+    uint16_t crc = 0xFFFF; /* Seed value */
+
+    for (size_t i = 0; i < len; ++i) {
+        uint16_t lookup = lut[(crc ^ data[i]) & 0xFF];
         crc = (crc >> 8) ^ lookup;
     }
+
     return(~crc);
 }
-
 
