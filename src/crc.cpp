@@ -1,17 +1,18 @@
+#include <stdint.h>
 
 class CRC16 {
     public:
         static unsigned short compute(unsigned char *data) {
-            unsigned short newCrc = 0x0FFFF;
+            unsigned short crc = 0xFFFF;
             for (unsigned long i = 0; i < sizeof(data); ++i) {
-                int lookup = LUT[(newCrc ^ data[i]) & 0xFF];
-                newCrc = (newCrc >> 8) ^ lookup;
+                int lookup = lut[(crc ^ data[i]) & 0xFF];
+                crc = (crc >> 8) ^ lookup;
             }
-            return(~newCrc);
+            return(~crc);
         }
 
     private:
-        static const unsigned short LUT[256];
+        static const uint16_t lut[256];
 };
 
 const uint16_t CRC16::lut[] = {
