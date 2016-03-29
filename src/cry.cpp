@@ -98,6 +98,7 @@ class Display {
 int main (int argc, char *argv[]) {
 
     Display d("/dev/tty");
+    d.clear();
 
 }
 
