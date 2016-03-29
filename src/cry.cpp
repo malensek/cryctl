@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <termios.h>
+#include <unistd.h>
 #ifndef OFILL
 #define OFILL   0000100
 #endif
@@ -25,6 +26,8 @@
 #ifndef FFDLY
 #define FFDLY   0100000
 #endif
+
+#include "Crc16.h"
 
 class Display {
     public:
@@ -72,6 +75,19 @@ class Display {
             _fd = -1;
         }
 
+        void clear() {
+            uint8_t data[4] = { 0 };
+            data[0] = 0x06;
+            data[1] = 0;
+
+            uint16_t crc = Crc16::compute(data, 2);
+            data[2] = 0xFF00 & crc;
+            data[3] = 0x00FF & crc;
+
+            write(_fd, data, 4);
+
+        }
+
     private:
         int _fd;
         std::string _devName;
@@ -82,6 +98,7 @@ class Display {
 int main (int argc, char *argv[]) {
 
     Display d("/dev/tty");
+
 }
 
 
