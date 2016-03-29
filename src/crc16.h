@@ -4,7 +4,8 @@
 #include <cstdlib>
 #include <stdint.h>
 
-class CRC16 {
+class Crc16 {
+
     public:
         static uint16_t compute(uint8_t *data, size_t len);
 
