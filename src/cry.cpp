@@ -29,6 +29,13 @@
 
 #include "Crc16.h"
 
+struct Message {
+    uint8_t command;
+    uint8_t length;
+    uint8_t data[22];
+    uint16_t crc;
+};
+
 class Display {
     public:
         Display(std::string devName, speed_t baud = B115200) {
