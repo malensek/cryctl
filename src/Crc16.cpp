@@ -39,8 +39,7 @@ uint16_t Crc16::compute(uint8_t *data, size_t len) {
     uint16_t crc = 0xFFFF; /* Seed value */
 
     for (size_t i = 0; i < len; ++i) {
-        uint16_t lookup = lut[(crc ^ data[i]) & 0xFF];
-        crc = (crc >> 8) ^ lookup;
+        crc = (crc >> 8) ^ lut[(crc ^ data[i]) & 0xFF];
     }
 
     return(~crc);
