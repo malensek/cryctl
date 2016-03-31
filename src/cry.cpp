@@ -88,8 +88,8 @@ class Display {
             data[1] = 0;
 
             uint16_t crc = Crc16::compute(data, 2);
-            data[2] = (0xFF00 & crc) >> 2;
-            data[3] = 0x00FF & crc;
+            data[3] = (0xFF00 & crc) >> 8;
+            data[2] = 0x00FF & crc;
 
             write(_fd, data, 4);
 
