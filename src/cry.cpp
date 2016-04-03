@@ -134,6 +134,7 @@ int main (int argc, char *argv[]) {
     Display d("/dev/ttyU0");
     d.clear();
     d.text();
+    d.setLedState();
 
 }
 
