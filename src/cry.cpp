@@ -29,8 +29,8 @@
 
 #include "Crc16.h"
 
-struct Message {
-    uint8_t command;
+struct Command {
+    uint8_t type;
     uint8_t length;
     uint8_t data[22];
     uint16_t crc;
