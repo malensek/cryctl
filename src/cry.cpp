@@ -111,6 +111,17 @@ class Display {
 
         }
 
+        void setLedState() {
+            Command cmd;
+            cmd.type = 0x22;
+            cmd.length = 2;
+            cmd.data[0] = 5;
+            cmd.data[1] = 100;
+            cmd.crc = Crc16::compute((uint8_t *) &cmd, cmd.length + 2);
+
+            write(_fd, (uint8_t *) &cmd, cmd.length + 2 + 2);
+        }
+
     private:
         int _fd;
         std::string _devName;
