@@ -104,6 +104,7 @@ class Display {
             data[3] = 1;
             std::copy(text.begin(), text.end(), &data[4]);
             uint16_t crc = Crc16::compute(data, data[1] + 2);
+            printf("crc: %x\n", crc);
             data[16] = 0xFF & crc;
             data[17] = (0xFF00 & crc) >> 8;
 
@@ -119,7 +120,18 @@ class Display {
             cmd.data[1] = 100;
             cmd.crc = Crc16::compute((uint8_t *) &cmd, cmd.length + 2);
 
-            write(_fd, (uint8_t *) &cmd, cmd.length + 2 + 2);
+            //write(_fd, (uint8_t *) &cmd, cmd.length + 2 + 2);
+            send(cmd);
+        }
+
+        void send(Command &cmd) {
+            write(_fd, &cmd.type, 2);
+            write(_fd, &cmd.data, cmd.length);
+            uint16_t crc = Crc16::compute((uint8_t *) &cmd, cmd.length + 2);
+            printf("CRC: %x\n", crc);
+            write(_fd, &crc, 2);
+
+
         }
 
     private:
@@ -135,6 +147,14 @@ int main (int argc, char *argv[]) {
     d.clear();
     d.text();
     d.setLedState();
+    Command cmd;
+    cmd.type = 0x1F;
+    cmd.length = 14;
+    cmd.data[0] = 0;
+    cmd.data[1] = 1;
+    std::string msg("hello world!");
+    std::copy(msg.begin(), msg.end(), &cmd.data[2]);
+    d.send(cmd);
 
 }
 
