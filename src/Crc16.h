@@ -1,13 +1,16 @@
-#ifndef _CRC16_H
-#define _CRC16_H
+#ifndef CRC16_H
+#define CRC16_H
 
+#include <cstdint>
 #include <cstdlib>
-#include <stdint.h>
+
+struct Command;
 
 class Crc16 {
 
     public:
-        static uint16_t compute(uint8_t *data, size_t len);
+        static uint16_t compute(const Command &cmd);
+        static uint16_t compute(const uint8_t *data, const size_t len);
 
     private:
         static const uint16_t lut[256];

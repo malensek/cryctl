@@ -1,5 +1,7 @@
 #include "Crc16.h"
 
+#include "Command.h"
+
 const uint16_t Crc16::lut[] = {
     0x0000, 0x1189, 0x2312, 0x329B, 0x4624, 0x57AD, 0x6536, 0x74BF,
     0x8C48, 0x9DC1, 0xAF5A, 0xBED3, 0xCA6C, 0xDBE5, 0xE97E, 0xF8F7,
@@ -35,7 +37,13 @@ const uint16_t Crc16::lut[] = {
     0x7BC7, 0x6A4E, 0x58D5, 0x495C, 0x3DE3, 0x2C6A, 0x1EF1, 0x0F78,
 };
 
-uint16_t Crc16::compute(uint8_t *data, size_t len) {
+uint16_t Crc16::compute(const Command &cmd) {
+    /* When creating a CRC for a command packet, we use the length of the data
+     * payload plus two bytes for the type and length fields. */
+    return compute((uint8_t *) &cmd, cmd.length + 2);
+}
+
+uint16_t Crc16::compute(const uint8_t *data, const size_t len) {
     uint16_t crc = 0xFFFF; /* Seed value */
 
     for (size_t i = 0; i < len; ++i) {
@@ -44,4 +52,5 @@ uint16_t Crc16::compute(uint8_t *data, size_t len) {
 
     return(~crc);
 }
+
 
