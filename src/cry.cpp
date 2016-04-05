@@ -119,11 +119,10 @@ class Display {
         }
 
         void send(Command &cmd) {
-            write(_fd, &cmd.type, 2);
-            write(_fd, &cmd.data, cmd.length);
-            uint16_t crc = Crc16::compute((uint8_t *) &cmd, cmd.length + 2);
+            uint16_t crc = Crc16::compute(cmd);
+            cmd.data[cmd.length] = Crc16::compute(cmd);
+            write(_fd, &cmd, sizeof(uint8_t) * (4 + cmd.length));
             printf("CRC: %x\n", crc);
-            write(_fd, &crc, 2);
 
 
         }
@@ -146,7 +145,7 @@ int main (int argc, char *argv[]) {
     cmd.length = 14;
     cmd.data[0] = 0;
     cmd.data[1] = 1;
-    std::string msg("hello world!");
+    std::string msg("hello cool world!");
     std::copy(msg.begin(), msg.end(), &cmd.data[2]);
     d.send(cmd);
 
