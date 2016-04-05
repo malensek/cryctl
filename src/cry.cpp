@@ -78,6 +78,12 @@ class Display {
         }
 
         void clear() {
+            Command cmd;
+            cmd.type = 0x06;
+            cmd.length = 0;
+            send(cmd);
+
+/*
             uint8_t data[4] = { 0 };
             data[0] = 0x06;
             data[1] = 0;
@@ -87,7 +93,7 @@ class Display {
             data[2] = 0x00FF & crc;
 
             write(_fd, data, 4);
-
+*/
         }
 
         void text() {
