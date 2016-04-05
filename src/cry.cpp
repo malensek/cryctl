@@ -84,21 +84,14 @@ class Display {
             send(cmd);
         }
 
-        void text() {
-            std::string text("hello world!");
-            uint8_t data[1 + 1 + 22 + 2] = { 0 };
-            data[0] = 0x1F;
-            data[1] = text.length() + 2;
-            data[2] = 0;
-            data[3] = 1;
-            std::copy(text.begin(), text.end(), &data[4]);
-            uint16_t crc = Crc16::compute(data, data[1] + 2);
-            printf("crc: %x\n", crc);
-            data[16] = 0xFF & crc;
-            data[17] = (0xFF00 & crc) >> 8;
-
-            write(_fd, data, 18);
-
+        void text(std::string text, int x = 0, int y = 0) {
+            Command cmd;
+            cmd.type = 0x1F;
+            cmd.length = text.length() + 2;
+            cmd.data[0] = x;
+            cmd.data[1] = y;
+            std::copy(text.begin(), text.end(), &cmd.data[2]);
+            send(cmd);
         }
 
         void setLedState() {
@@ -138,14 +131,6 @@ int main (int argc, char *argv[]) {
     d.clear();
     d.text();
     d.setLedState();
-    Command cmd;
-    cmd.type = 0x1F;
-    cmd.length = 14;
-    cmd.data[0] = 0;
-    cmd.data[1] = 1;
-    std::string msg("hello cool world! :)");
-    std::copy(msg.begin(), msg.end(), &cmd.data[2]);
-    d.send(cmd);
 
 }
 
