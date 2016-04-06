@@ -1,13 +1,13 @@
 
-#include "Display.h"
+#include "Lcd.h"
 
 int main (int argc, char *argv[]) {
 
-    Display d("/dev/ttyU0");
-    d.clear();
-    d.addText("--  sigma.lan  --", 0, 1);
-    d.addText("-- uptime: 24d --", 0, 2);
-    d.setLedState();
+    Lcd l("/dev/ttyU0");
+    l.clear();
+    l.addText("hello world!", 0, 1);
+    l.addText("hello world! (again)", 0, 2);
+    l.setLedState();
 
 }
 
