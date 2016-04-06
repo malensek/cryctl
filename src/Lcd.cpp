@@ -1,4 +1,4 @@
-#include "Display.h"
+#include "Lcd.h"
 
 #include <fcntl.h>
 #include <iostream>
@@ -29,7 +29,7 @@
 #define FFDLY   0100000
 #endif
 
-Display::Display(std::string devName, speed_t baud) {
+Lcd::Lcd(std::string devName, speed_t baud) {
     _devName = devName;
     _baud = baud;
     std::cout << "Init device: " << _devName.c_str() << std::endl;
@@ -68,19 +68,19 @@ Display::Display(std::string devName, speed_t baud) {
 
 }
 
-Display::~Display() {
+Lcd::~Lcd() {
     close(_fd);
     _fd = -1;
 }
 
-void Display::clear() {
+void Lcd::clear() {
     Command cmd;
     cmd.type = 0x06;
     cmd.length = 0;
     send(cmd);
 }
 
-void Display::addText(std::string text, int x, int y) {
+void Lcd::addText(std::string text, int x, int y) {
     Command cmd;
     cmd.type = 0x1F;
     cmd.length = text.length() + 2;
@@ -90,7 +90,7 @@ void Display::addText(std::string text, int x, int y) {
     send(cmd);
 }
 
-void Display::setLedState() {
+void Lcd::setLedState() {
     Command cmd;
     cmd.type = 0x22;
     cmd.length = 2;
@@ -99,7 +99,7 @@ void Display::setLedState() {
     send(cmd);
 }
 
-ssize_t Display::send(Command &cmd) {
+ssize_t Lcd::send(Command &cmd) {
     if (cmd.length > MAX_COMMAND_LEN) {
         return -1;
     }

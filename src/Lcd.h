@@ -1,15 +1,15 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#ifndef LCD_H
+#define LCD_H
 
 #include <string>
 #include <termios.h>
 
 struct Command;
 
-class Display {
+class Lcd {
     public:
-        Display(std::string devName, speed_t baud = B115200);
-        ~Display();
+        Lcd(std::string devName, speed_t baud = B115200);
+        ~Lcd();
 
         void addText(std::string text, int x = 0, int y = 0);
         void clear();
