@@ -3,6 +3,7 @@
 
 #include <string>
 #include <termios.h>
+#include <vector>
 
 struct Command;
 
@@ -13,6 +14,8 @@ class Lcd {
 
         void addText(std::string text, uint8_t x = 0, uint8_t y = 0);
         void clear();
+        void ping();
+        void ping(std::vector<uint8_t> &data);
         void reboot();
         void setLedState();
 

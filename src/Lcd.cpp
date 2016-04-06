@@ -90,6 +90,27 @@ void Lcd::addText(std::string text, uint8_t x, uint8_t y) {
     send(cmd);
 }
 
+void Lcd::ping() {
+    Command cmd;
+    cmd.type = 0x0;
+    send(cmd);
+}
+
+void Lcd::ping(std::vector<uint8_t> &data) {
+    Command cmd;
+    cmd.type = 0x0;
+
+    std::vector<uint8_t>::size_type len = data.size();
+    if (len > 16) {
+        len = 16;
+    }
+    cmd.length = len;
+
+    std::copy(data.begin(), data.begin() + len, &cmd.data[0]);
+
+    send(cmd);
+}
+
 void Lcd::setLedState() {
     Command cmd;
     cmd.type = 0x22;
