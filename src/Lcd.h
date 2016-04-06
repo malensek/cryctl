@@ -13,6 +13,7 @@ class Lcd {
 
         void addText(std::string text, int x = 0, int y = 0);
         void clear();
+        void reboot();
         void setLedState();
 
     private:

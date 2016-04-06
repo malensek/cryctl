@@ -99,6 +99,15 @@ void Lcd::setLedState() {
     send(cmd);
 }
 
+void Lcd::reboot() {
+    Command cmd;
+    cmd.type = 0x05;
+    cmd.length = 3;
+    cmd.data[0] = 8;
+    cmd.data[1] = 18;
+    cmd.data[2] = 99;
+}
+
 ssize_t Lcd::send(Command &cmd) {
     if (cmd.length > MAX_COMMAND_LEN) {
         return -1;
