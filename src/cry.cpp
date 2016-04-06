@@ -111,11 +111,8 @@ class Display {
             Command cmd;
             cmd.type = 0x22;
             cmd.length = 2;
-            cmd.data[0] = 5;
+            cmd.data[0] = 6;
             cmd.data[1] = 100;
-            cmd.crc = Crc16::compute((uint8_t *) &cmd, cmd.length + 2);
-
-            //write(_fd, (uint8_t *) &cmd, cmd.length + 2 + 2);
             send(cmd);
         }
 
@@ -152,7 +149,7 @@ int main (int argc, char *argv[]) {
     cmd.length = 14;
     cmd.data[0] = 0;
     cmd.data[1] = 1;
-    std::string msg("hello cool world!");
+    std::string msg("hello cool world! :)");
     std::copy(msg.begin(), msg.end(), &cmd.data[2]);
     d.send(cmd);
 
