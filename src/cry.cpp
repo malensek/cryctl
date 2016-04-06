@@ -29,6 +29,7 @@
 
 #include "Crc16.h"
 #include "Command.h"
+#include <string.h>
 
 class Display {
     public:
@@ -118,13 +119,19 @@ class Display {
             send(cmd);
         }
 
-        void send(Command &cmd) {
+        ssize_t send(Command &cmd) {
+            if (cmd.length > MAX_COMMAND_LEN) {
+                return -1;
+            }
+
             uint16_t crc = Crc16::compute(cmd);
-            cmd.data[cmd.length] = Crc16::compute(cmd);
-            write(_fd, &cmd, sizeof(uint8_t) * (4 + cmd.length));
-            printf("CRC: %x\n", crc);
-
-
+            memcpy(&cmd.data[cmd.length], &crc, sizeof(crc));
+            size_t numBytes = sizeof(cmd.data) * (cmd.length + 2) + sizeof(crc);
+            ssize_t out = write(_fd, &cmd, numBytes);
+            if (out == -1) {
+                std::perror("Display::send()");
+            }
+            return out;
         }
 
     private:
