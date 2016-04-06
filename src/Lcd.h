@@ -11,7 +11,7 @@ class Lcd {
         Lcd(std::string devName, speed_t baud = B115200);
         ~Lcd();
 
-        void addText(std::string text, int x = 0, int y = 0);
+        void addText(std::string text, uint8_t x = 0, uint8_t y = 0);
         void clear();
         void reboot();
         void setLedState();

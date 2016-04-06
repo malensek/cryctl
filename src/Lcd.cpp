@@ -80,7 +80,7 @@ void Lcd::clear() {
     send(cmd);
 }
 
-void Lcd::addText(std::string text, int x, int y) {
+void Lcd::addText(std::string text, uint8_t x, uint8_t y) {
     Command cmd;
     cmd.type = 0x1F;
     cmd.length = text.length() + 2;
