@@ -10,6 +10,8 @@ class Charmap {
 
     private:
         static std::unordered_map<uint8_t, uint8_t> toLcdMap;
+
+        static std::unordered_map<uint8_t, uint8_t> createLcdMap();
 };
 
 #endif
