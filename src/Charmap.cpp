@@ -1,7 +1,6 @@
 #include "Charmap.h"
 
-
-const std::unordered_map<uint8_t, uint8_t> Charmap::toLcdMap = {
+std::unordered_map<uint8_t, uint8_t> Charmap::toLcdMap = {
     {36,  162}, // $
     {64,  160}, // @
     {91,  250}, // [
