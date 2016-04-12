@@ -1,14 +1,27 @@
+bin=cryctl
+version=1.0
+distname=$(bin)-$(version)
 
-make_cmd = ${MAKE} -C src $*
+CXXFLAGS += -Wall
 
-all:
-	${make_cmd}
-	mkdir -p bin
-	cp src/cryctl bin
+cryctl_src=src/Charmap.cpp src/Crc16.cpp src/Lcd.cpp src/cry.cpp
+cryctl_obj=$(cryctl_src:.cpp=.o)
 
-options:
-	${make_cmd}
+all: $(bin)
+
+cryctl: $(cryctl_obj)
+	$(CXX) $(CXXFLAGS) $(cryctl_obj) -o $@
+
+depend:
+	makedepend -Y $(cryctl_src)
 
 clean:
-	${make_cmd}
-	rm -rf bin
+	rm -f $(cryctl_obj)
+	rm -f $(bin)
+
+# DO NOT DELETE
+
+src/Charmap.o: src/Charmap.h
+src/Crc16.o: src/Crc16.h src/Command.h
+src/Lcd.o: src/Lcd.h src/Crc16.h src/Command.h
+src/cry.o: src/Lcd.h
