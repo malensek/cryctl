@@ -16,6 +16,8 @@ std::unordered_map<uint8_t, uint8_t> Charmap::createLcdMap() {
     map[124] = 254; // |
     map[125] = 255; // }
     map[126] = 206; // ~
+    map[171] = 20;  // «
+    map[187] = 21;  // »
 
     return map;
 }
