@@ -141,6 +141,16 @@ ssize_t Lcd::send(Command &cmd) {
     if (out == -1) {
         std::perror("Display::send()");
     }
+
+    receive();
     return out;
 }
+
+void Lcd::receive() {
+
+    uint8_t buffer[1024];
+    int bytesRead = read(_fd, &buffer, 1024);
+    printf("Read %d bytes\n", bytesRead);
+}
+
 

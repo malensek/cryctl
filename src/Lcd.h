@@ -25,6 +25,7 @@ class Lcd {
         speed_t _baud;
 
         ssize_t send(Command &cmd);
+        void receive();
 };
 
 #endif
