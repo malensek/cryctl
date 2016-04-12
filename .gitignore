@@ -1,3 +1,3 @@
-*.o
-bin
-src/cryctl
+/cryctl
+/Makefile.bak
+/src/*.o
