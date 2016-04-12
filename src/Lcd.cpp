@@ -1,7 +1,9 @@
 #include "Lcd.h"
 
+#include <chrono>
 #include <fcntl.h>
 #include <iostream>
+#include <thread>
 #include <unistd.h>
 
 #include "Crc16.h"
@@ -147,7 +149,7 @@ ssize_t Lcd::send(Command &cmd) {
 }
 
 void Lcd::receive() {
-
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     uint8_t buffer[1024];
     int bytesRead = read(_fd, &buffer, 1024);
     printf("Read %d bytes\n", bytesRead);
